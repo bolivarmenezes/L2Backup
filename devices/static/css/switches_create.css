@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.change_type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.change_type a {
+    text-decoration: none;
+    font-weight: bolder;
+    color: white;
+    font-size: 2em;
+}
+
+.change_type div:hover {
+    box-shadow: 28px 31px 17px 5px rgba(0, 0, 0, 0.1);
+}
+
+.change_type div {
+    background-color: rgba(33, 37, 41, 0.897);
+    margin-top: 2em;
+    padding: 1em;
+}
+
+.change_form {
+    padding: 2em;
+}
+
+#form_create_switch {
+    padding-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form_create_switch input,
+select {
+    width: 80%;
+    height: 2.3em;
+    margin: 0.5em;
+}
+
+#form_create_switch input #id_location {
+    width: -2em;
+}
+
+#createSt {
+    background-color: rgb(11, 51, 11);
+    font-weight: bolder;
+    color: white;
+    font-size: 1.3em;
+    width: 10em;
+}
+
+#createSt:hover {
+    background-color: rgb(9, 104, 9);
+    color: white;
+    font-size: 1.3em;
+    font-weight: bolder;
+}
+
+#message {
+    font-size: 2em;
+}
+
+@media (max-width: 1300px) {}
+
+@media (max-width: 530px) {
+    .change_type {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: column;
+    }
+    .change_type a {
+        font-size: 1.5em;
+        text-align: center;
+    }
+    #form_create_switch input,
+    select {
+        width: 100%;
+        margin: 0;
+        margin-top: 1em;
+    }
+}
+
+@media (max-width: 800px) {
+    .change_type div {
+        background-color: rgba(33, 37, 41, 0.897);
+        margin-top: 1em;
+        padding: 0.2em;
+        width: 100%;
+    }
+    #message {
+        font-size: 1em;
+        text-align: center;
+    }
+}

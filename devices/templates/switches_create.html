@@ -1,0 +1,112 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/switches_create.css' %}">
+<link rel="stylesheet" href="{% static 'css/location.css' %}">
+<div class="container">
+    <div class="change_type">
+        <a href="#">
+            <div class="s1">Com Gerência</div>
+        </a>
+        <a href="#">
+            <div class="s2">Sem Gerência</div>
+        </a>
+    </div>
+    <div class="change_form">
+        <form method="post" id="form_create_switch" style="display:none ;">
+            {% csrf_token %}
+            <tr>
+                <td><input type="text" name="ip" placeholder="Endereço IP" maxlength="50" id="id_ip"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="mac" placeholder="Endereço MAC" maxlength="50" id="id_mac"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="name" placeholder="Hostname" maxlength="50" id="id_name"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="vendor" placeholder="Marca" maxlength="50" id="id_vendor"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="model" placeholder="Modelo" maxlength="50" id="id_model"></td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="community" id="id_community">
+                        <option value="public" selected>public</option>
+                        <option value="public">public</option>
+                        <option value="UFSMcomunidade">UFSMcomunidade</option>
+                        <option value="UFSM2002n">UFSM2002n</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <select name="snmp_version" id="id_snmp_version">
+                    <option value="1">SNMP v1</option>
+                    <option value="2" selected>SNMP v2c</option>
+                    <option value="3">SNMP v3</option>
+                </select>
+            </tr>
+            <tr>
+                <td><input type="text" name="patrimony" placeholder="Patrimônio" maxlength="50" id="id_patrimony"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="location" placeholder="Localização" maxlength="100" id="id_location" data-bs-toggle="modal" data-bs-target="#doLocation">
+                </td>
+            </tr>
+            <input type="text" name="disable_scan" id="id_disable_scan" hidden>
+            <input type="text" name="online" id="id_online" hidden>
+            <input type="submit" id="createSt" autocomplete="off" value="Cadastrar" data-bs-toggle="modal" data-bs-target="#doCreate">
+        </form>
+    </div>
+</div>
+
+<!-- Modal Mensagens-->
+<div class="modal fade" id="doCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p id="message">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal gerar localização-->
+<div class="modal fade" id="doLocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gera localização</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-long-body">
+                <form id="location_generate">
+                    <select type="text" name="building" id="id_building">
+                    </select>
+                    <select type="text" name="floor" id="id_floor">
+                    </select>
+                    <select type="text" name="rack" id="id_rack">
+                    </select>
+                    <div class="sala_corredor">
+                        <label for="sala">Sala</label>
+                        <input class="sc" value="S" type="radio" name="sala_corredor" checked>
+                        <label for="corredor">Corredor</label>
+                        <input class="sc" value="C" type="radio" name="sala_corredor">
+                    </div>
+                    <input type="text" placeholder="Número de SALA próxima" id="number_room">
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-info">Gerar Localização</button>
+                    <div class="result">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/switches_create.js' %}"></script>
+<script src="{% static 'js/location.js' %}"></script>
+
+{% endblock %}

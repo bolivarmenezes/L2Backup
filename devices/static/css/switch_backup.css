@@ -1,0 +1,59 @@
+tr:not(:first-child):hover {
+    background: rgba(38, 110, 44, 0.527);
+    font-weight: bold;
+}
+
+#editSwitch {
+    font-size: 1em;
+}
+
+#editSwitch label {
+    width: 12em;
+}
+
+.modal-footer button {
+    width: 10em;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+#doBkp .modal-dialog .modal-content {
+    padding-top: 5em;
+    font-size: 16pt;
+}
+
+#doBkp .modal-dialog .modal-content .modal-body {
+    height: 15em;
+}
+
+.modal-long-body svg {
+    width: 100%;
+    height: 10em;
+}
+
+.modal-long-body img {
+    width: 100%;
+    margin-bottom: 1em;
+    background-color: #212529;
+}
+
+@media (max-width: 500px) {
+    .table {
+        font-size: 10pt;
+    }
+    .hidden_colun {
+        display: none;
+    }
+    .table-success {
+        display: none;
+    }
+    .table-warning {
+        display: none;
+    }
+    .table-danger {
+        display: none;
+    }
+}

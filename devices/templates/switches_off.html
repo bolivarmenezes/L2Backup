@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<main role="main" class="container">
+    <link rel="stylesheet" href="{% static 'css/switches_off.css' %}">
+    <div class="inform">
+        Última verificação:
+        <td>{{last_ping}}</td>
+    </div>
+    <div id="disable_st" class="row mb-3">
+        <table class="table table-bordered" id="table_switch_off">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">IP (Offlines: {{ amount_switches_off }})</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">MAC</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Localização</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% csrf_token %} {% for switch in switches %} {% if switch.online == '0' and switch.disable_st == '0' %}
+                <tr id="hide_{{ switch.ip }}" class="table-danger">
+                    <td>{{switch.ip}}</td>
+                    <td>{{switch.name}}</td>
+                    <td>{{switch.mac}}</td>
+                    <td>{{switch.vendor}}</td>
+                    <td>{{switch.model}}</td>
+                    <td>{{switch.location}}</td>
+                </tr>
+                {% endif %} {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="delete_st">
+            Desabilitar Switch
+        </button>
+        <button type="button" id="disabled_sts">
+            Switches desabilitados
+        </button>
+
+        <!--Menu lateral-->
+        <div id="sliding-menu">
+            <button id="close-menu">X</button>
+
+            <table class="table table-bordered" id="table_switch_disabled">
+                <thead>
+                    <tr>
+                        <th>IP</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% csrf_token %} {% for switch in switches %} {% if switch.disable_st == '1' %}
+                    <tr>
+                        <td>{{switch.ip}}</td>
+                        <td>{{switch.name}}</td>
+                    </tr>
+                    {% endif %} {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="div_modal_disable_st" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Desabilitar Switch</h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar
+                    </button>
+                    <button type="button" id="btn_delete" class="btn btn-danger">Desabilitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/switches_off.js' %}"></script>
+
+{% endblock %}

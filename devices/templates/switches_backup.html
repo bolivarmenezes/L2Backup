@@ -1,0 +1,165 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/switch_backup.css' %}">
+<table class="table" id="table_switch_backup">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">IP</th>
+            <th scope="col">Nome</th>
+            <th class="hidden_colun" scope="col">MAC</th>
+            <th class="hidden_colun" scope="col">Modelo</th>
+            <th class="hidden_colun" scope="col">Localização</th>
+            <th class="hidden_colun" scope="col">Patrimônio</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            {% if user.is_superuser %}
+            <th class="hidden_colun" scope="col">Último backup</th>
+            <th scope="col"></th>
+            <th class="hidden_colun" scope="col">Status</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% csrf_token %} {% for switch in switches %} {% if switch.last_backup != 'NaN' %}
+        <tr>
+            {% else %}
+            <tr>
+                {% endif %}
+                <td>{{switch.ip}}</td>
+                <td>{{switch.name}}</td>
+                <td class="hidden_colun">{{switch.mac}}</td>
+                <td class="hidden_colun">{{switch.vendor}} {{switch.model}}</td>
+                <td class="hidden_colun">{{switch.location}}</td>
+                <td class="hidden_colun">{{switch.patrimony}}</td>
+
+                <td>
+                    <a class="pictures_st" id="picture_{{switch.name}}" href="#" data-bs-toggle="modal" data-bs-target="#doPicture">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                        <path
+                            d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z" />
+                        <path
+                            d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                    </svg>
+                    </a>
+
+                </td>
+                {% if user.is_superuser %} {% if switch.online == '1' %}
+                <td>
+                    <a class="bacukp_st" id="backup_{{switch.ip}}" href="#" data-bs-toggle="modal" data-bs-target="#doBkp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                        <path
+                            d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                        <path fill-rule="evenodd"
+                            d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                    </svg>
+                    </a>
+                </td>
+                {% else %}
+                <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                </svg>
+                </td>
+
+                {% endif %} {% if switch.last_backup != 'NaN' %}
+                <!--tem backup-->
+                {% if switch.last_backup_error == '0' %}
+                <!--último backup não tem erro-->
+                {% if switch.online == '1' %}
+                <!--switch está online-->
+                <td class="table-success">{{switch.last_backup}}</td>
+                {% else %}
+                <!--Switch está offline, mas o ultimo bkp ta ok-->
+                <td class="table-danger">{{switch.last_backup}}</td>
+                {% endif %}
+                <!--último bkp ta ruim-->
+                {% else %}
+                <td class="table-warning">{{switch.last_backup}}</td>
+                {% endif %}
+
+
+                <td>
+                    <a class="download_bacukp_st" id="download_{{switch.name}}" href="#" data-bs-toggle="modal" data-bs-target="#doDownload">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                        <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                    </svg>
+                    </a>
+                </td>
+                {% else %}
+                <td class="table-warning">vazio</td>
+                <td>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                </svg>
+                </td>
+                {% endif %} {% if switch.online == '1' %}
+                <td class="table-success">Online</td>
+                {% else %}
+                <td class="table-danger">Offline</td>
+                {% endif %} {% endif %}
+            </tr>
+
+            {% endfor %}
+    </tbody>
+</table>
+<!--</div>-->
+<!-- Modal -->
+<div class="modal fade" id="doBkp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center" id="gif_loading">
+                    <div class="spinner-border" role="status">
+                    </div>
+                    <p> Backup em andamento...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="doDownload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="name_switch"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-long-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Foto-->
+<div class="modal fade" id="doPicture" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="name_switch_picture"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-long-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/exif-js.js' %}"></script>
+<script src="{% static 'js/switches_backup.js' %}"></script>
+
+{% endblock %}

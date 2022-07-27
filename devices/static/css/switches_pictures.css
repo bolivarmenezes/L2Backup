@@ -1,0 +1,166 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.uploadPicture {
+    width: 100%;
+    height: 20em;
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.choosePicPreview {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+}
+
+.choosePicPreview img {
+    width: 80%;
+    z-index: 5;
+}
+
+.metadata_textarea {
+    width: 100%;
+}
+
+#observation_id {
+    width: 100%;
+}
+
+.metadata_textarea textarea {
+    width: 100%;
+    height: 98%;
+    border: 0;
+}
+
+#send-pic {
+    margin-top: 0.5em;
+    width: 100%;
+}
+
+#send-pic #id_name {
+    width: 100%;
+    height: 2.3em;
+    font-size: 13pt;
+}
+
+.search_switch {
+    width: 100%;
+    height: 10em;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-top: 1em;
+}
+
+.search_switch a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.line_a {
+    width: 100%;
+    padding: 0.5em;
+}
+
+.line_a:hover {
+    width: 100%;
+    background-color: rgb(34, 83, 83);
+    color: white;
+    font-weight: bold;
+}
+
+#sendImg {
+    width: 100%;
+    margin-bottom: 1em;
+    background-color: rgb(36, 117, 117);
+}
+
+
+/*Segunda linha de divs*/
+
+.showPicures {
+    width: 100%;
+    height: 30em;
+    display: flex;
+    margin-top: 3em;
+}
+
+.picture_save {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    /*overflow: scroll;*/
+}
+
+.picture_save .pic_st_base {
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.info_map {
+    width: 100%;
+    height: 40em;
+}
+
+.seach_name_back {
+    display: flex;
+}
+
+.seach_name_back svg {
+    width: 2.5em;
+    height: 100%;
+    padding: 0.1em;
+    margin-left: 0.2em;
+}
+
+.picture_save svg {
+    width: 100%;
+    height: 10em;
+    margin-top: 2em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-wrap: wrap;
+    }
+    .uploadPicture {
+        display: flex;
+        flex-direction: column;
+    }
+    .send-pic {
+        width: 100%;
+    }
+    #sendImg {
+        margin-bottom: 1em;
+        position: relative;
+    }
+    .choosePicPreview {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .choosePicPreview img {
+        position: relative;
+        width: 80%;
+    }
+    .metadata_textarea {
+        position: relative;
+    }
+    .picture_save {
+        margin-top: 3em;
+    }
+}

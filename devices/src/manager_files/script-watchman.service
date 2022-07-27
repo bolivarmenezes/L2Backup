@@ -1,0 +1,11 @@
+[Unit]
+Description=Script para inicializar com o linux e gerenciar backups
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/usr/bin/start_watchman
+TimeoutStartSec=0
+[Install]
+WantedBy=default.target

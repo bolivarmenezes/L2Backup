@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% load static %} {% block content%}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<div class="dashboard">
+    <div class="all_switch_number">
+        <div class="qtd">Total de Switches:<b> {{amount_sts}}</b></div>
+        <div class="bkp">Switches com Backups:<b> {{amount_backups_ok}}</b></div>
+        <div class="off">Switches Offline:<b> {{amount_switches_off}}</b></div>
+        <div class="icmp">Scan ICMP:<b> {{last_scan_icmp}}</b></div>
+        <div class="snmp">Scan SNMP:<b> {{last_scan_snmp}}</b></div>
+        <div class="fullbkp">Backup completo:<b> {{last_backup_full}}</b></div>
+    </div>
+    <div class="all_switch_protocol">
+        {% csrf_token %}
+        {% if user.is_superuser %}
+        <div id="scan_all_st" class="scan_all"><a href="#" data-bs-toggle="modal" data-bs-target="#doScanAll">Realizar
+                Busca completa SNMP</a></div>
+        <div id="backup_all_st" class="bkp_all"><a href="#" data-bs-toggle="modal" data-bs-target="#doBkpAll">Backup de
+                todos os switches online</a></div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="doBkpAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center" id="gif_loading">
+                    <div class="spinner-border" role="status">
+                    </div>
+                    <p> Backup em andamento...</p>
+                    <p>Não é necessário manter essa janela aberta. O backup continuará em backgroud</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="doScanAll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <br>
+                <div class="text-center" id="gif_loading">
+                    <div class="spinner-border" role="status">
+                    </div>
+                    <p>Scan em andamento...</p>
+                    <p>Não é necessário manter essa janela aberta. O scan continuará em backgroud</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block jquery %}
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock jquery %}

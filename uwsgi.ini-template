@@ -1,0 +1,10 @@
+[uwsgi]
+plugins         = python3
+chdir           = /opt/scriptsPython/netinterface
+module          = net_interface.wsgi
+home            = /usr/bin
+master          = true
+processes       = 10
+socket          = /opt/web/sockets/netinterface.sock
+vacuum          = true
+chmod-socket    = 666

@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/switch_backup.css' %}">
+<table class="table" id="table_switch_backup">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Netbackup ({{qtdMongo}})</th>
+        <th scope="col">Observium ({{qtdMysql}})</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% csrf_token %}
+    {% for control in ReportsController %}
+    <tr>
+        <td>{{control.mongo}}</td>
+        <td>{{control.mysql}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<!--<script src="{% static 'js/switches_backup.js' %}"></script>-->
+
+{% endblock %}

@@ -1,0 +1,1 @@
+watchman -- trigger ~/backup_switches  'updateFiles' -- updateBackup

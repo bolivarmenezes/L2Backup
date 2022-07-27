@@ -1,0 +1,11 @@
+{
+    "git.ignoreLimitWarning": true,
+    "code-runner.executorMap": {
+        "javascript": "node",        
+        "python": "venv/bin/python",        
+    },
+    "liveServer.settings.CustomBrowser": "chrome",
+    "cSpell.words": [
+        "Mcomunidade"
+    ]
+}

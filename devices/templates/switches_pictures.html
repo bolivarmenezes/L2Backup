@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/switches_pictures.css' %}">
+<link rel="stylesheet" href="{% static 'css/leaflet.css' %}">
+
+
+<div class="container">
+
+    <div class="uploadPicture">
+        <div id="send-pic">
+            <form method="post" id="formPic" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="seach_name_back">
+                    <input type="text" name="name" maxlength="50" placeholder="Informe o nome do switch" required id="id_name">
+                    <a href="#" id="reset_form">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="search_switch" id="search">
+                </div>
+                <div class="input-group mb-3">
+                    <input name="st_picture" id="inputFilePic" class="form-control" type="file" accept="*png, *jpeg, *jpg">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">
+                            <a href="#" id="linkMetadata"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z" />
+                                    <path
+                                        d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z" />
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <textarea name="observation" id="observation_id" placeholder="Observações (opcional):"></textarea>
+                <button id="sendImg" class="btn btn-dark" type="submit">Enviar</button>
+
+        </div>
+
+        <div class="metadata_textarea" id="metadata_textarea" style="display: none;">
+            <textarea type="textarea" name="metadata_pic" id="metadata" rows="5"></textarea>
+        </div>
+        </form>
+        <!--style="display:none"-->
+        <div id="imgClick" class="choosePicPreview">
+            <img src="" alt="" style="display:nome;" id="preview">
+        </div>
+        <p id="output"></p>
+    </div>
+    <div class="showPicures">
+        <div class="picture_save"></div>
+        <!--<div class="info_map" id="map"></div>-->
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="doUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center" id="gif_loading">
+                    <div class="spinner-border" role="status">
+                    </div>
+                    <p> Enviando foto...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/exif-js.js' %}"></script>
+<script src="{% static 'js/switches_pictures.js' %}"></script>
+<!--<script src="{% static 'js/image-blob-reduce.min.js' %}"></script>-->
+<script src="{% static 'js/compressor.min.js' %}"></script>
+<script src="{% static 'js/axios.min.js' %}"></script>
+
+{% endblock %}

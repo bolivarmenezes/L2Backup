@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %} {% block content%}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/access_point.css' %}">
+
+<div class="row mb-3" id="background_sts">
+    <table class="table" id="table_switch">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">IP</th>
+                <th class="hidden_colun" scope="col">MAC</th>
+                <th class="hidden_colun" scope="col">Modelo</th>
+                <th class="hidden_colun" scope="col">Localização</th>
+                <th class="hidden_colun" scope="col">Patrimônio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ap in aps %}
+            <tr>
+                <td>{{ap.ap_hostname}}</td>
+                <td>{{ap.ap_ip}}</td>
+                <td class="hidden_colun">{{ap.ap_mac}}</td>
+                <td class="hidden_colun">{{ap.ap_model}}</td>
+                <td class="hidden_colun">{{ap.ap_location}}</td>
+                <td class="hidden_colun">{{ap.ap_patrimony}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/access_point.js' %}"></script>
+{% endblock %}

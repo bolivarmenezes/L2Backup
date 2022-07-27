@@ -1,0 +1,85 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    padding: 0.5em;
+    font-size: 18pt;
+    padding-top: 1em;
+    align-items: center;
+}
+
+.dashboard .all_switch_number {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1em;
+    border: 1px solid;
+    align-items: center;
+}
+
+.dashboard .all_switch_protocol {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1em;
+    border: 1px solid;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.all_switch_protocol a {
+    color: rgb(255, 255, 255);
+    background: #212529;
+    padding: 0.3em;
+    border-radius: 0.3em;
+    text-decoration: none;
+}
+
+.all_switch_protocol a:hover {
+    color: rgb(113, 189, 113);
+    background-color: rgb(44, 94, 77);
+}
+
+@media (max-width: 800px) {
+    .dashboard {
+        font-size: 12pt;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .dashboard .all_switch_number {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1em;
+        border: 0;
+        width: 100%;
+    }
+    .all_switch_number>div,
+    .all_switch_protocol>div,
+    .all_switch_info>div {
+        border: 1px solid;
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+        border-radius: 0.1em;
+        width: 100%;
+        text-align: center;
+    }
+    .dashboard .all_switch_protocol {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1em;
+        border: 0;
+        width: 100%;
+    }
+    .all_switch_protocol a {
+        background: white;
+        color: #212529;
+    }
+    .all_switch_protocol a:hover {
+        background: white;
+        color: #212529;
+    }
+}
